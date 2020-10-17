@@ -21,8 +21,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/save",
-            consumes = MediaType.APPLICATION_JSON_VALUE, produces = "text/plain")
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "text/plain")
     public @ResponseBody
     ResponseEntity<String> save(@RequestBody Item item) {
         try {
@@ -34,9 +33,9 @@ public class ItemController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/findById", params = {"id"}, produces = "text/plain")
+    @GetMapping(value = "/findById/{id}", produces = "text/plain")
     public @ResponseBody
-    ResponseEntity<String> findById(@RequestParam(name = "id") Long id) {
+    ResponseEntity<String> findById(@PathVariable(value = "id") Long id) {
         try {
             itemService.findById(id);
             return new ResponseEntity<>("ok", HttpStatus.OK);
@@ -48,8 +47,7 @@ public class ItemController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/update",
-            consumes = MediaType.APPLICATION_JSON_VALUE, produces = "text/plain")
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "text/plain")
     public @ResponseBody
     ResponseEntity<String> update(@RequestBody Item item) {
         try {
@@ -63,9 +61,9 @@ public class ItemController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/delete", params = {"id"}, produces = "text/plain")
+    @DeleteMapping(value = "/delete/{id}", produces = "text/plain")
     public @ResponseBody
-    ResponseEntity<String> delete(@RequestParam(name = "id") Long id) {
+    ResponseEntity<String> delete(@PathVariable(name = "id") Long id) {
         try {
             itemService.delete(id);
             return new ResponseEntity<>("ok", HttpStatus.OK);

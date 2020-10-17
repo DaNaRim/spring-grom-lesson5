@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.exception.BadRequestException;
+import com.exception.ObjectNotFoundException;
 import com.model.Item;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +20,11 @@ public class ItemDAOImpl implements ItemDAO {
         return item;
     }
 
-    public Item findById(Long id) throws BadRequestException {
+    public Item findById(Long id) throws ObjectNotFoundException {
         Item item = entityManager.find(Item.class, id);
 
         if (item == null) {
-            throw new BadRequestException("Missed item with id: " + id);
+            throw new ObjectNotFoundException("Missed item with id: " + id);
         }
         return item;
     }

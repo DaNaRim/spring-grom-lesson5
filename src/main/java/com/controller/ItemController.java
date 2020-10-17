@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.exception.BadRequestException;
+import com.exception.ObjectNotFoundException;
 import com.model.Item;
 import com.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +40,8 @@ public class ItemController {
         try {
             itemService.findById(id);
             return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (ObjectNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -55,8 +55,8 @@ public class ItemController {
         try {
             itemService.update(item);
             return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (ObjectNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -69,8 +69,8 @@ public class ItemController {
         try {
             itemService.delete(id);
             return new ResponseEntity<>("ok", HttpStatus.OK);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (ObjectNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);

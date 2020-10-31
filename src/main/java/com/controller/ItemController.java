@@ -26,10 +26,11 @@ public class ItemController {
     ResponseEntity<String> save(@RequestBody Item item) {
         try {
             itemService.save(item);
+
             return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -38,12 +39,14 @@ public class ItemController {
     ResponseEntity<String> findById(@PathVariable(value = "id") Long id) {
         try {
             itemService.findById(id);
+
             return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
+
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -52,12 +55,14 @@ public class ItemController {
     ResponseEntity<String> update(@RequestBody Item item) {
         try {
             itemService.update(item);
+
             return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
+
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -66,13 +71,14 @@ public class ItemController {
     ResponseEntity<String> delete(@PathVariable(name = "id") Long id) {
         try {
             itemService.delete(id);
+
             return new ResponseEntity<>("ok", HttpStatus.OK);
         } catch (ObjectNotFoundException e) {
+
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return new ResponseEntity<>("something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }
